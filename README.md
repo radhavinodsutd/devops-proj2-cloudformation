@@ -93,3 +93,37 @@ Feel free to contribute to the project and suggest improvements!
 
 ---
 **Author**: Your Name | **Date**: [Date] | **License**: MIT License
+
+The key differences between your first beginner project and this intermediate-level DevOps project are as follows:
+
+1. Scope of Automation
+Beginner Project: Focused primarily on setting up a basic CI/CD pipeline, integrating GitHub Actions with simple deployments to a platform like AWS Elastic Beanstalk or directly updating an S3 bucket.
+Intermediate Project: Introduces infrastructure provisioning with AWS CloudFormation for the entire environment, including VPC, subnets, EC2, RDS, and IAM roles. This expands beyond the scope of just deploying code, providing infrastructure automation as well.
+2. Deployment Process
+Beginner Project: Likely involved a straightforward deployment where the target environment remained static (e.g., deploying a zip file or pushing an updated HTML file to S3).
+Intermediate Project: Uses AWS CodeDeploy, which is more advanced as it includes features like deployment groups, deployment strategies (in-place or blue/green), and integrates directly with EC2 instances. This allows for scalable, managed, and automated deployments with finer control over deployment processes.
+3. Infrastructure as Code (IaC)
+Beginner Project: Infrastructure, if needed, was mostly static or manually set up.
+Intermediate Project: Incorporates CloudFormation as an IaC tool, enabling you to define infrastructure declaratively. This involves setting up networking (VPC, subnets), EC2 instances, and RDS databases, which are then automatically provisioned and managed.
+4. Systems Management and CodeDeploy Agent Installation
+Beginner Project: The focus would be primarily on basic setup and deployment, without advanced system management.
+Intermediate Project: Introduces AWS Systems Manager (SSM) to remotely manage instances and install the CodeDeploy agent. SSM allows you to execute commands and manage EC2 instances seamlessly, which is a significant addition in terms of managing infrastructure.
+5. Use of IAM Roles and Security
+Beginner Project: Likely had minimal IAM usage, with simple permissions, mainly to facilitate access to resources like S3 or Elastic Beanstalk.
+Intermediate Project: Requires multiple IAM roles:
+EC2 Instance Roles with permissions for Systems Manager and CodeDeploy.
+GitHub Actions Role with policies for S3, CodeDeploy, and other services to ensure secure and seamless integration.
+More emphasis on access control, ensuring the CodeDeploy role has permissions for managing deployments, and configuring roles that enable interaction with multiple services securely.
+6. Complexity of CI/CD Pipeline
+Beginner Project: The CI/CD pipeline may have been simpler, possibly with basic build and test steps followed by deployment to a static environment.
+Intermediate Project: Involves setting up a multi-step CI/CD pipeline that uses GitHub Actions to:
+Test the application using pytest.
+Package and deploy using CodeDeploy.
+Manage permissions and access keys securely through GitHub Secrets.
+Introduce S3 as a storage location for deployment artifacts, integrating multiple AWS services together.
+7. Handling Challenges and Nuances
+Beginner Project: Likely had fewer challenges related to permissions or bucket policies, and the security settings were simpler to manage.
+Intermediate Project: Faced more nuanced challenges, such as:
+Bucket Access Issues: Need to handle ACLs and bucket policies properly to make S3 buckets accessible for website hosting.
+IAM Policy Management: Required a deeper understanding of IAM permissions to allow GitHub Actions to interact with S3, CodeDeploy, and Systems Manager.
+CodeDeploy Setup: Involved creating applications and deployment groups, tagging instances, and ensuring proper IAM role assignment for successful automated deployments.
