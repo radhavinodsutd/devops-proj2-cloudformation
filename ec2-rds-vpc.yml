@@ -126,13 +126,30 @@ Resources:
     Properties:
       InstanceType: t2.micro
       KeyName: !Ref KeyName
+      IamInstanceProfile: ec2-codedeploy-role
       SecurityGroupIds:
         - !Ref MySecurityGroup
       SubnetId: !Ref PublicSubnet
-      ImageId: ami-0984f4b9e98be44bf # Amazon Linux 2 AMI for ap-southeast-1 region
+      ImageId: ami-09fcb1e15a7d9b9f2 # Amazon Linux 2 AMI for ap-southeast-1 region
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y ruby
+          yum install -y wget
+          cd /home/ec2-user
+          wget https://aws-codedeploy-ap-southeast-1.s3.amazonaws.com/latest/install
+          chmod +x ./install
+          ./install auto
+      MetadataOptions:
+        HttpTokens: optional
+        HttpPutResponseHopLimit: 2
+        InstanceMetadataTags: enabled
       Tags:
         - Key: Name
           Value: MyEC2Instance
+        - Key: CodeDeploy
+          Value: ProjectServer
 
   # RDS Subnet Group
   MyDBSubnetGroup:
