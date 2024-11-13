@@ -47,11 +47,8 @@ jobs:
       run: zip -r app.zip .
 
     - name: Upload to S3
-      uses: jakejarvis/s3-sync-action@v0.5.1
-      with:
-        args: --acl public-read
-        source: '.'
-        destination: 's3://my-deployment-bucket-devops-proj2'
+      run: |
+        aws s3 cp app.zip s3://my-deployment-bucket-devops-proj2-radv/app.zip --acl public-read
 
     - name: Deploy with AWS CLI
       run: |
