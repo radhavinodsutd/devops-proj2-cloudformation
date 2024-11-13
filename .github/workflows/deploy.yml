@@ -47,17 +47,15 @@ jobs:
       run: zip -r app.zip .
 
     - name: Upload to S3
-      uses: aws-actions/s3-sync-action@v0.5.0
+      uses: jakejarvis/s3-sync-action@v0.5.1
       with:
         args: --acl public-read
         source: '.'
         destination: 's3://my-deployment-bucket-devops-proj2'
 
-    - name: Deploy with CodeDeploy
-      uses: aws-actions/aws-codedeploy-action@v0.2.0
-      with:
-        application-name: MyFlaskAppDeployment
-        deployment-group-name: MyFlaskAppGroup
-        bucket: my-deployment-bucket
-        key: app.zip
-        bundle-type: zip
+    - name: Deploy with AWS CLI
+      run: |
+        aws deploy create-deployment \
+          --application-name MyFlaskAppDeployment \
+          --deployment-group-name MyFlaskAppGroup \
+          --s3-location bucket=my-deployment-bucket-devops-proj2,key=app.zip,bundleType=zip

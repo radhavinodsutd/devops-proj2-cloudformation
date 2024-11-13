@@ -129,7 +129,7 @@ Resources:
       SecurityGroupIds:
         - !Ref MySecurityGroup
       SubnetId: !Ref PublicSubnet
-      ImageId: ami-08f49baa317796afd # Amazon Linux 2 AMI for ap-southeast-1 region
+      ImageId: ami-0984f4b9e98be44bf # Amazon Linux 2 AMI for ap-southeast-1 region
       Tags:
         - Key: Name
           Value: MyEC2Instance
